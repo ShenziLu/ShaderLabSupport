@@ -1,0 +1,246 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "shader",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#Green"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include":"#comments"
+		},
+		{
+			"include": "#function"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#unity"
+		},
+		{
+			"include": "#common"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [
+				{
+					"name": "keyword.control.shader",
+					"match": "\\b(if|while|for|return|continue|do)\\b"
+				},
+				{
+					"name": "keyword.other.shader",
+					"match": "[#]+[\\s]*?\\b(if|include|ifdef|ifndef|endif|else|define|undef|pragma|elif)\\b"
+				},
+				{
+					"name": "keyword.other.shader",
+					"match": "\\b(void|int|uint|in|out|inout|float|float2|float3|float4|fixed|fixed2|fixed3|fixed3|half|half2|half3|half4|uniform|real|real2|real3|real4|real3x3|CGPROGRAM|ENDCG|HLSLPROGRAM|ENDHLSL|CGINCLUDE|HLSLINCLUDE)\\b"
+				}
+			]
+		},
+		"Green": {
+			"patterns": [
+				{
+					"name": "source.shader",
+					"match": "(,)\\s*?\\b([Rr]ange|[Ff]loat|[Ii]nt|[Cc]olor|[Vv]ector|2D|3D|[Cc]ube|[Aa]ny)\\b",
+					"captures": {
+						"1": {
+							"name": "source.shader"
+						},
+						"2": {
+							"name": "support.class.shader"
+						}
+					}
+				},
+				{
+					"name": "support.class.shader",
+					"match": "\\b(HDR|HideInInspector|Toggle)\\b"
+				},
+				{
+					"name": "keyword.struct.shader",
+					"match": "struct\\s*?([a-zA-Z0-9_]+)",
+					"captures": {
+						"1": {
+							"name": "support.class.structures.shader"
+						}
+					}
+				},
+				{
+					"name": "unity.properties.shader",
+					"match": "\\b(_+[a-zA-Z0-9]+[_A-Za-z0-9]*?)\\b"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.shader",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.shader",
+					"match": "\\\\."
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.double-dash.shaderlab",
+					"begin": "//",
+					"end": "$"
+				},
+				{
+					"name": "comment.block.shaderlab",
+					"begin": "/\\*",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.shaderlab"
+						}
+					},
+					"end": "\\*/",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.shaderlab"
+						}
+					}
+				}
+			]
+		},
+		"function":{
+			"patterns": [
+				{
+					"match": "\\b([A-Za-z0-9][A-Za-z0-9_]*)\\b[ \\t]*\\(",
+					"name": "meta.method.shader",
+					"captures": {
+						"1": {
+							"name": "support.function.shader"
+						}
+					}
+				},
+				{
+					"match": "\\bCBUFFER_START|CBUFFER_END\\b",
+					"name": "support.function.shader"
+				}
+			]
+		},
+		"numbers":{
+			"patterns": [
+				{
+					"name": "constant.numeric.shader",
+					"match": "\\b([0-9]+[\\.]?[0-9]*f?)\\b"
+				}
+			]
+		},
+		"unity": {
+			"patterns": [
+				{
+					"name": "unity.variables.transformations.shader",
+					"match": "\\b(UNITY_MATRIX_MVP|UNITY_MATRIX_MV|UNITY_MATRIX_V|UNITY_MATRIX_P|UNITY_MATRIX_VP|UNITY_MATRIX_T_MV|UNITY_MATRIX_IT_MV|_Object2World|_World2Object|unity_ObjectToWorld|unity_WorldToObject|unity_WorldTransformParams)\\b"
+				},
+				{
+					"name": "unity.variables.camera.shader",
+					"match": "\\b(_WorldSpaceCameraPos|_ProjectionParams|_ScreenParams|_ZBufferParams|unity_OrthoParams|unity_CameraProjection|unity_CameraInvProjection|unity_CameraWorldClipPlanes)\\b"
+				},
+				{
+					"name": "unity.variables.time.shader",
+					"match": "\\b(_Time|_SinTime|_CosTime|unity_DeltaTime)\\b"
+				},
+				{
+					"name": "unity.variables.lighting.shader",
+					"match": "\\b(_LightColor0|_WorldSpaceLightPos0|_LightMatrix0|unity_4LightPosX0|unity_4LightPosY0|unity_4LightPosZ0|unity_4LightAtten0|unity_LightColor|_LightColor|unity_LightPosition|unity_LightAtten|unity_SpotDirection)\\b"
+				},
+				{
+					"name": "unity.variables.fog.shader",
+					"match": "\\b(unity_AmbientSky|unity_AmbientEquator|unity_AmbientGround|UNITY_LIGHTMODEL_AMBIENT|unity_FogColor|unity_FogParams)\\b"
+				},
+				{
+					"name": "unity.variables.various.shader",
+					"match": "\\b(unity_LODFade)\\b"
+				},
+				{
+					"name": "unity.variables.preprocessor.targetplatform.shader",
+					"match": "\\b(SHADER_API_D3D9|SHADER_API_D3D11|SHADER_API_GLCORE|SHADER_API_OPENGL|SHADER_API_GLES|SHADER_API_GLES3|SHADER_API_METAL|SHADER_API_D3D11_9X|SHADER_API_PSSL|SHADER_API_XBOXONE|SHADER_API_PSP2|SHADER_API_WIIU|SHADER_API_MOBILE|SHADER_API_GLSL|SHADER_API_VULKAN)\\b"
+				},
+				{
+					"name": "unity.variables.preprocessor.targetmodel.shader",
+					"match": "\\b(SHADER_TARGET)\\b"
+				},
+				{
+					"name": "unity.variables.preprocessor.unityversion.shader",
+					"match": "\\b(UNITY_VERSION)\\b"
+				},
+				{
+					"name": "unity.variables.preprocessor.platformdifference.shader",
+					"match": "\\b(UNITY_BRANCH|UNITY_FLATTEN|UNITY_NO_SCREENSPACE_SHADOWS|UNITY_NO_LINEAR_COLORSPACE|UNITY_NO_RGBM|UNITY_NO_DXT5nm|UNITY_FRAMEBUFFER_FETCH_AVAILABLE|UNITY_USE_RGBA_FOR_POINT_SHADOWS|UNITY_ATTEN_CHANNEL|UNITY_HALF_TEXEL_OFFSET|UNITY_UV_STARTS_AT_TOP|UNITY_MIGHT_NOT_HAVE_DEPTH_Texture|UNITY_NEAR_CLIP_VALUE|UNITY_VPOS_TYPE|UNITY_CAN_COMPILE_TESSELLATION|UNITY_COMPILER_HLSL|UNITY_COMPILER_HLSL2GLSL|UNITY_COMPILER_CG|UNITY_REVERSED_Z)\\b"
+				},
+				{
+					"name": "unity.variables.preprocessor.texture2D.shader",
+					"match": "\\b(UNITY_PASS_FORWARDBASE|UNITY_PASS_FORWARDADD|UNITY_PASS_DEFERRED|UNITY_PASS_SHADOWCASTER|UNITY_PASS_PREPASSBASE|UNITY_PASS_PREPASSFINAL)\\b"
+				},
+				{
+					"name": "unity.class.structures.shader",
+					"match": "\\b(appdata_base|appdata_tan|appdata_full|appdata_img)\\b"
+				},
+				{
+					"name": "unity.class.surface.shader",
+					"match": "\\b(SurfaceOutputStandardSpecular|SurfaceOutputStandard|SurfaceOutput|Input)\\b"
+				},
+				{
+					"name": "storage.type.structure.shader",
+					"match": "\\b(?i:Shader|Properties|SubShader|Pass|Category)\\b"
+				},
+				{
+					"name": "unity.class.shader",
+					"match": "\\b(Name|Tags|Fallback|CustomEditor|Cull|ZWrite|ZTest|Offset|Blend|BlendOp|ColorMask|AlphaToMask|LOD|Lighting|Stencil|Ref|ReadMask|WriteMask|Comp|CompBack|CompFront|Fail|ZFail|UsePass|GrabPass|Dependency|Material|Fog|Mode|Density|SeparateSpecular|SetTexture|Combine|ConstantColor|Matrix|AlphaTest|ColorMaterial|BindChannels|Bind)\\b"
+				},
+				{
+					"name": "unity.constant.shader",
+					"match": "\\b(Back|Front|On|Off|AmbientAndDiffuse|RGB|A|R|G|B)\\b"
+				},
+				{
+					"name": "unity.constant.comparisonfunction.shader",
+					"match": "\\b(?i:Less|Greater|LEqual|GEqual|Equal|NotEqual|Always|Never)\\b"
+				},
+				{
+					"name": "unity.constant.stenciloperation.shader",
+					"match": "\\b(?i:Keep|Zero|Replace|IncrSat|DecrSat|Invert|IncrWrap|DecrWrap)\\b"
+				},
+				{
+					"name": "unity.constant.texturecombiners.shader",
+					"match": "\\b(?i:Previous|Primary|Texture|Constant|Lerp|Double|Quad)\\b"
+				},
+				{
+					"name": "unity.constant.fog.shader",
+					"match": "\\b(?i:Global|Linear|Exp2|Exp)\\b"
+				},
+				{
+					"name": "unity.constant.bindchannels.shader",
+					"match": "(:)(\\s*?)\\b(?i:Vertex|Normal|Vector|Tangent|TexCoord(\\d?)|SV_POSITION|BLENDWEIGHT|POSITION|TEXUNIT(\\d?)|SV_TARGET|SV_CULLDISTANCE|Color(\\d?))\\b"
+				},
+				{
+					"name": "unity.constant.blendoperations.shader",
+					"match": "\\b(?i:Add|Sub|RevSub|Min|Max|LogicalClear|LogicalSet|LogicalCopyInverted|LogicalCopy|LogicalNoop|LogicalInvert|LogicalAnd|LogicalNand|LogicalOr|LogicalNor|LogicalXor|LogicalEquiv|LogicalAndReverse|LogicalAndInverted|LogicalOrReverse|LogicalOrInverted)\\b"
+				},
+				{
+					"name": "unity.constant.blendfactors.shader",
+					"match": "\\b(?i:One|Zero|SrcColor|SrcAlpha|DstColor|DstAlpha|OneMinusSrcColor|OneMinusSrcAlpha|OneMinusDstColor|OneMinusDstAlpha)\\b"
+				}
+			]
+		},
+		"common":{
+			"patterns": [
+				{
+					"name":"support.variable.shader",
+					"match":"\\b([A-Za-z0-9]+[_A-Za-z0-9]*?)\\b"
+				}
+			]
+		}
+	},
+	"scopeName": "source.shader"
+}

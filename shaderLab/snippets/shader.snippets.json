@@ -1,0 +1,190 @@
+{
+    "for":{
+        "prefix":"for",
+        "body":[
+            "for(int ${0:i} = 0; ${0:i} < length; ${0:i}++)",
+            "{",
+            "\t",
+            "}"
+        ]
+    },
+    "if":{
+        "prefix":"if",
+        "body":[
+            "if(${0:true})",
+            "{",
+            "\t",
+            "}"
+        ]
+    },
+    "#if":{
+        "prefix":"#if",
+        "body":[
+            "#if $0",
+            "\t",
+            "#else",
+            "\t",
+            "#endif"
+        ]
+    },
+    "#elif":{
+        "prefix":"#elif",
+        "body":[
+            "#if $0",
+            "\t",
+            "#elif ",
+            "\t",
+            "#else",
+            "\t",
+            "#endif"
+        ]
+    },
+    "#ifdef":{
+        "prefix":"#ifdef",
+        "body":[
+            "#ifdef $0",
+            "\t",
+            "#else",
+            "\t",
+            "#endif"
+        ]
+    },
+    "#ifndef":{
+        "prefix":"#ifndef",
+        "body":[
+            "#ifndef ${0:${TM_FILENAME/(.*)\\.[a-z]+/${1:/upcase}/i}}",
+            "\t#define ${0:${TM_FILENAME/(.*)\\.[a-z]+/${1:/upcase}/i}}",
+            "#endif"
+        ]
+    },
+    "CGINCLUDE":{
+        "prefix":"CGINCLUDE",
+        "body":[
+            "CGINCLUDE",
+            "$0",
+            "ENDCG"
+        ]
+    },
+    "CGPROGRAM":{
+        "prefix":"CGPROGRAM",
+        "body":[
+            "CGPROGRAM",
+            "$0",
+            "ENDCG"
+        ]
+    },
+    "HLSLINCLUDE":{
+        "prefix":"HLSLINCLUDE",
+        "body":[
+            "HLSLINCLUDE",
+            "$0",
+            "ENDHLSL"
+        ]
+    },
+    "HLSLPROGRAM":{
+        "prefix":"HLSLPROGRAM",
+        "body":[
+            "HLSLPROGRAM",
+            "$0",
+            "ENDHLSL"
+        ]
+    },
+    "cbuffer":{
+        "prefix":"cbuffer_",
+        "body":[
+            "CBUFFER_START(${0:UnityPerDraw})",
+            "\t",
+            "CBUFFER_END"
+        ]
+    },
+    "struct":{
+        "prefix":"struct",
+        "body":[
+            "struct $0",
+            "{",
+            "\t",
+            "};"
+        ]
+    },
+    "Shader":{
+        "prefix":"Shader",
+        "body":[
+            "Shader \"${0:CustomShader}\/${TM_FILENAME/(.*)\\.[a-z]+/${1:/ignore}/i}\"",
+            "{",
+            "\t",
+            "}"
+        ]
+    },
+    "Properties":{
+        "prefix":"Properties",
+        "body":[
+            "Properties",
+            "{",
+            "\t$0",
+            "}"
+        ]
+    },
+    "Pass":{
+        "prefix":"Pass",
+        "body":[
+            "Pass",
+            "{",
+            "\t$0",
+            "}"
+        ]
+    },
+    "Tags":{
+        "prefix":"Tags",
+        "body":[
+            "Tags{ \"RenderType\" = \"${0:Opaque}\" }"
+        ]
+    },
+    "2D":{
+        "prefix":"2D",
+        "body":[
+            "_${0:MainTex}(\"${0:MainTex}\", 2D) = \"White\" {}"
+        ]
+    },
+    "3D":{
+        "prefix":"3D",
+        "body":[
+            "_${0:MainTex}(\"${0:MainTex}\", 3D) = \"White\" {}"
+        ]
+    },
+    "Color":{
+        "prefix":"Color",
+        "body":[
+            "_${0:MainColor}(\"${0:MainColor}\", Color) = (0,0,0,0)"
+        ]
+    },
+    "Vector":{
+        "prefix":"Vector",
+        "body":[
+            "_${0:MainVector}(\"${0:MainVector}\", Vector) = (0,0,0,0)"
+        ]
+    },
+    "Cube":{
+        "prefix":"Cube",
+        "body":[
+            "_${0:MainCube}(\"${0:MainCube}\", Cube) = \"White\" {}"
+        ]
+    },
+    "Float":{
+        "prefix":"Float",
+        "body":[
+            "_${0:MainFloat}(\"${0:MainFloat}\", Float) = 0"
+        ]
+    },
+    "Int":{
+        "prefix":"Int",
+        "body":[
+            "_${0:MainInt}(\"${0:MainInt}\", Int) = 0"
+        ]
+    },
+    "Range":{
+        "prefix":"Range",
+        "body":[
+            "_${0:MainRange}(\"${0:MainRange}\", Range( 0 , 1)) = 0"
+        ]
+    }
+}
